@@ -96,6 +96,10 @@ class BayesClassifier:
         # tokens from the file and the appropriate dictionary
             print(f"positive? {filename.startswith(self.pos_file_prefix)}")
             print(f"negative? {filename.startswith(self.neg_file_prefix)}")
+            tokens = self.tokenize(text)
+            print(tokens)
+            #conditional that adds to the appropriate dictionary
+            self.update_dict(tokens, self.pos_freqs)
 
         # for debugging purposes, it might be useful to print out the tokens and their
         # frequencies for both the positive and negative dictionaries
@@ -229,7 +233,11 @@ class BayesClassifier:
             freqs - dictionary of frequencies to update
         """
         # TODO: your work here
-        pass  # remove this line once you've implemented this method
+        for word in words: 
+            if word in freqs:
+                freqs[word] += 1
+            else: 
+                freqs[word] = 1
 
 
 if __name__ == "__main__":
